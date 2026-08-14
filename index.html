@@ -10,11 +10,12 @@
   :root {
     --ink: #2b2926; --soft: #6b655c; --cream: #faf7f2; --card: #ffffff;
     --accent: #0e6f6a; --accent-dark: #0a524e; --accent-soft: #e3f0ef;
-    --line: #e8e2d8; --gold: #b98a2f;
+    --line: #e8e2d8; --gold: #a87a24;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; scroll-padding-top: 70px; }
-  body { background: var(--cream); color: var(--ink); font-family: Georgia, 'Times New Roman', serif; line-height: 1.6; }
+  body { background: var(--cream); color: var(--ink); font-family: Georgia, 'Times New Roman', serif; font-size: 17px; line-height: 1.65; }
+  a { text-decoration-thickness: 1px; text-underline-offset: 3px; }
   .sans { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
 
   nav {
@@ -94,9 +95,9 @@
   }
   .readbox:hover { border-color: var(--accent); }
   .item.read .readbox { background: var(--accent); border-color: var(--accent); }
-  .item .t { font-weight: bold; font-size: 0.98rem; }
-  .item .m { color: var(--soft); font-size: 0.85rem; }
-  .item .w { font-size: 0.93rem; margin-top: 3px; }
+  .item .t { font-weight: bold; font-size: 1rem; }
+  .item .m { color: #5d574e; font-size: 0.86rem; line-height: 1.5; }
+  .item .w { font-size: 0.95rem; margin-top: 4px; }
   .tag {
     font-family: 'Segoe UI', system-ui, sans-serif; font-size: 0.68rem;
     background: var(--accent); color: #fff; border-radius: 4px;
@@ -104,6 +105,18 @@
   }
   .tag.book { background: var(--gold); }
 
+  .fw-card { cursor: pointer; }
+  .fw-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+  .fw-head .caret { color: var(--accent); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 0.85rem; transition: transform .2s ease; flex-shrink: 0; }
+  .fw-card.open .fw-head .caret { transform: rotate(180deg); }
+  .fw-oneline { color: var(--soft); font-size: 0.92rem; margin-top: 2px; }
+  .fw-detail { display: none; margin-top: 12px; border-top: 1px dashed var(--line); padding-top: 12px; }
+  .fw-card.open .fw-detail { display: block; }
+  .fw-detail p { margin-bottom: 8px; }
+  .fw-diagram { margin: 14px auto; text-align: center; }
+  .fw-diagram svg { max-width: 100%; height: auto; }
+  .golinks { font-size: 0.9rem; margin-top: 10px; }
+  .golinks a { margin-right: 14px; white-space: nowrap; }
   .habit {
     background: var(--accent-soft); border-radius: 12px; padding: 20px 22px; font-size: 0.98rem;
     border: 1px solid #d3e6e4;
@@ -163,7 +176,7 @@
 
 <section id="library">
   <h2>The library</h2>
-  <p class="lead">Every theme pairs one anchor (the work the field stands on) with current pieces worth your time. Tick what you've read; this page remembers.</p>
+  <p class="lead">Every theme pairs one anchor (the work the field stands on) with current pieces worth your time, articles first, always linked where a link exists. Only three books survive, each seminal. Tick what you've read; this page remembers.</p>
 
   <div class="chips" id="chips">
     <button class="chip active" data-theme="all">All</button>
@@ -181,8 +194,8 @@
 
   <div class="theme-block" data-theme="craft">
     <h3 class="theme">The craft of coaching</h3>
-    <div class="item" data-id="reynolds-coach-person"><div class="readbox">&#10003;</div><div><div class="t">Coach the Person, Not the Problem <span class="tag">ANCHOR</span></div><div class="m">Marcia Reynolds, 2020, book</div><div class="w">Reflective inquiry at master level. Start of everything.</div></div></div>
-    <div class="item" data-id="schein-humble"><div class="readbox">&#10003;</div><div><div class="t">Humble Inquiry</div><div class="m">Edgar Schein, 2013 (2nd ed. 2021), book</div><div class="w">The asking-versus-telling stance that minimal-intervention coaching rests on.</div></div></div>
+    <div class="item" data-id="reynolds-coach-person"><div class="readbox">&#10003;</div><div><div class="t">Coach the Person, Not the Problem <span class="tag">ANCHOR</span></div><div class="m">Marcia Reynolds, 2020, book (seminal, kept deliberately) &middot; <a href="https://covisioning.com/coach-the-person-book/">overview</a></div><div class="w">Reflective inquiry at master level. Start of everything; one of only three books on this page.</div></div></div>
+    <div class="item" data-id="schein-humble"><div class="readbox">&#10003;</div><div><div class="t">Humble Inquiry</div><div class="m">Edgar Schein, 2013 (2nd ed. 2021), book (seminal, kept deliberately)</div><div class="w">The asking-versus-telling stance that minimal-intervention coaching rests on.</div></div></div>
     <div class="item" data-id="icf-competencies"><div class="readbox">&#10003;</div><div><div class="t">ICF Core Competencies with MCC skill distinctions</div><div class="m">coachingfederation.org, reference document</div><div class="w">Not reading, calibration: the behavioral difference between good coaching and masterful coaching, spelled out.</div></div></div>
     <div class="item" data-id="dehart-mcc"><div class="readbox">&#10003;</div><div><div class="t">Coaching at the MCC Level: The Invisible Architecture of Mastery</div><div class="m">Lyssa deHart, article &middot; <a href="https://lyssadehart.com/self-discovery-blog/professional-coaches/coaching-at-the-mcc-level-the-invisible-architecture-of-mastery/">link</a></div><div class="w">What actually distinguishes mastery: presence, non-attachment, comfort with silence, layered listening.</div></div></div>
   </div>
@@ -197,40 +210,40 @@
 
   <div class="theme-block" data-theme="self">
     <h3 class="theme">Self-leadership and awareness</h3>
-    <div class="item" data-id="goleman-leader"><div class="readbox">&#10003;</div><div><div class="t">What Makes a Leader? <span class="tag">ANCHOR</span></div><div class="m">Daniel Goleman, HBR, 1998</div><div class="w">The emotional-intelligence baseline behind every 360 debrief you run.</div></div></div>
+    <div class="item" data-id="goleman-leader"><div class="readbox">&#10003;</div><div><div class="t">What Makes a Leader? <span class="tag">ANCHOR</span></div><div class="m">Daniel Goleman, HBR, 1998 &middot; <a href="https://hbr.org/2004/01/what-makes-a-leader">article</a> (HBR subscription)</div><div class="w">The emotional-intelligence baseline behind every 360 debrief you run.</div></div></div>
     <div class="item" data-id="kegan-immunity"><div class="readbox">&#10003;</div><div><div class="t">The Real Reason People Won't Change</div><div class="m">Kegan &amp; Lahey, HBR, Nov 2001 &middot; <a href="https://hbr.org/2001/11/the-real-reason-people-wont-change">article</a> (HBR subscription) &middot; book for depth: <em>Immunity to Change</em>, 2009</div><div class="w">Why leaders do not change despite wanting to: the hidden competing commitment. The deepest tool for a mid-program check-in call. Start with the article.</div></div></div>
   </div>
 
   <div class="theme-block" data-theme="conflict">
     <h3 class="theme">Conflict, feedback, difficult conversations</h3>
-    <div class="item" data-id="stone-difficult"><div class="readbox">&#10003;</div><div><div class="t">Difficult Conversations <span class="tag">ANCHOR</span></div><div class="m">Stone, Patton &amp; Heen, 1999 (updated 2023), book</div><div class="w">You know it; refresh it. Still the base layer under this whole theme.</div></div></div>
-    <div class="item" data-id="buckingham-feedback"><div class="readbox">&#10003;</div><div><div class="t">The Feedback Fallacy</div><div class="m">Buckingham &amp; Goodall, HBR, 2019</div><div class="w">The strongest challenge to feedback orthodoxy. Sharpens every conversation you have about developmental feedback.</div></div></div>
+    <div class="item" data-id="stone-difficult"><div class="readbox">&#10003;</div><div><div class="t">Find the Coaching in Criticism <span class="tag">ANCHOR</span></div><div class="m">Heen &amp; Stone, HBR, 2014 &middot; <a href="https://hbr.org/2014/01/find-the-coaching-in-criticism">article</a> (HBR subscription) &middot; book for depth: <em>Difficult Conversations</em></div><div class="w">The receiving side of feedback, by the Difficult Conversations authors. Start with the article; the book stays the base layer.</div></div></div>
+    <div class="item" data-id="buckingham-feedback"><div class="readbox">&#10003;</div><div><div class="t">The Feedback Fallacy</div><div class="m">Buckingham &amp; Goodall, HBR, 2019 &middot; <a href="https://hbr.org/2019/03/the-feedback-fallacy">article</a> (HBR subscription)</div><div class="w">The strongest challenge to feedback orthodoxy. Sharpens every conversation you have about developmental feedback.</div></div></div>
     <div class="item" data-id="gnepp-future-feedback"><div class="readbox">&#10003;</div><div><div class="t">The Future of Feedback (future-focused vs past-focused)</div><div class="m">Gnepp et al., open access &middot; <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7304587/">link</a></div><div class="w">Three studies with managers: future-focused feedback gets accepted and acted on more, even when negative. Directly usable in a coaching call.</div></div></div>
   </div>
 
   <div class="theme-block" data-theme="power">
     <h3 class="theme">Power and the matrix</h3>
-    <div class="item" data-id="cohen-influence"><div class="readbox">&#10003;</div><div><div class="t">Influence Without Authority <span class="tag">ANCHOR</span></div><div class="m">Cohen &amp; Bradford, 3rd ed. 2017, book</div><div class="w">The exchange model underneath power-sharing in matrixed organizations.</div></div></div>
-    <div class="item" data-id="pfeffer-power"><div class="readbox">&#10003;</div><div><div class="t">Power: Why Some People Have It and Others Don't</div><div class="m">Jeffrey Pfeffer, 2010, book</div><div class="w">The unsentimental view of organizational politics your enterprise-leader coachees actually live in.</div></div></div>
+    <div class="item" data-id="cohen-influence"><div class="readbox">&#10003;</div><div><div class="t">Influencing Without Authority: The Currency of Collaboration <span class="tag">ANCHOR</span></div><div class="m">Michigan Ross &middot; <a href="https://michiganross.umich.edu/programs/executive-education/insights/influencing-without-authority-currency-collaboration">article</a> &middot; book for depth: Cohen &amp; Bradford, <em>Influence Without Authority</em></div><div class="w">The exchange model underneath power-sharing in matrixed organizations: influence as trading in currencies the other party values.</div></div></div>
+    <div class="item" data-id="pfeffer-power"><div class="readbox">&#10003;</div><div><div class="t">Power Play</div><div class="m">Jeffrey Pfeffer, HBR, 2010 &middot; <a href="https://hbr.org/2010/07/power-play">article</a> (HBR subscription) &middot; book for depth: <em>Power</em></div><div class="w">The unsentimental view of organizational politics your enterprise-leader coachees actually live in, in article form.</div></div></div>
     <div class="item" data-id="hult-influence"><div class="readbox">&#10003;</div><div><div class="t">Influencing Without Authority to Drive Change</div><div class="m">Hult Ashridge, article &middot; <a href="https://www.hultashridge.com/en/insights/article/influence-without-authority/">link</a></div><div class="w">Short and practical: stakeholder dynamics, building advocates, trust.</div></div></div>
   </div>
 
   <div class="theme-block" data-theme="change">
     <h3 class="theme">Leading change</h3>
-    <div class="item" data-id="kotter-change"><div class="readbox">&#10003;</div><div><div class="t">Leading Change: Why Transformation Efforts Fail <span class="tag">ANCHOR</span></div><div class="m">John Kotter, HBR, 1995</div><div class="w">The seminal base your change program content sits on.</div></div></div>
+    <div class="item" data-id="kotter-change"><div class="readbox">&#10003;</div><div><div class="t">Leading Change: Why Transformation Efforts Fail <span class="tag">ANCHOR</span></div><div class="m">John Kotter, HBR, 1995 &middot; <a href="https://hbr.org/1995/05/leading-change-why-transformation-efforts-fail-2">article</a> (HBR subscription)</div><div class="w">The seminal base your change program content sits on.</div></div></div>
     <div class="item" data-id="hbr-continuous-change"><div class="readbox">&#10003;</div><div><div class="t">Leading Through Continuous Change</div><div class="m">HBR, Jun 2025 &middot; <a href="https://hbr.org/2025/06/leading-through-continuous-change">link</a></div><div class="w">The current reframe: change as permanent condition, not episode. Your coachees will bring change fatigue; this names it.</div></div></div>
     <div class="item" data-id="ccl-fatigue"><div class="readbox">&#10003;</div><div><div class="t">How to Overcome Change Fatigue</div><div class="m">Center for Creative Leadership, article &middot; <a href="https://www.ccl.org/articles/leading-effectively-articles/change-fatigue-continual-evolution/">link</a></div><div class="w">Five coachable strategies, including accounting for people's cumulative change history.</div></div></div>
   </div>
 
   <div class="theme-block" data-theme="teams">
     <h3 class="theme">Teams and psychological safety</h3>
-    <div class="item" data-id="edmondson-fearless"><div class="readbox">&#10003;</div><div><div class="t">The Fearless Organization <span class="tag">ANCHOR</span></div><div class="m">Amy Edmondson, 2018, book</div><div class="w">The psychological-safety base for every team conversation.</div></div></div>
-    <div class="item" data-id="edmondson-wrong"><div class="readbox">&#10003;</div><div><div class="t">Right Kind of Wrong: The Science of Failing Well</div><div class="m">Amy Edmondson, 2023, book</div><div class="w">Her current thinking. Connects to growth mindset with far more substance than the pop version.</div></div></div>
+    <div class="item" data-id="edmondson-fearless"><div class="readbox">&#10003;</div><div><div class="t">What Is Psychological Safety? <span class="tag">ANCHOR</span></div><div class="m">HBR, 2023 &middot; <a href="https://hbr.org/2023/02/what-is-psychological-safety">article</a> (HBR subscription) &middot; book for depth: Edmondson, <em>The Fearless Organization</em></div><div class="w">The psychological-safety base for every team conversation, in article form.</div></div></div>
+    <div class="item" data-id="edmondson-wrong"><div class="readbox">&#10003;</div><div><div class="t">Strategies for Learning from Failure</div><div class="m">Amy Edmondson, HBR, 2011 &middot; <a href="https://hbr.org/2011/04/strategies-for-learning-from-failure">article</a> (HBR subscription) &middot; book for depth: <em>Right Kind of Wrong</em>, 2023</div><div class="w">Not all failure is equal: preventable, complexity-related, intelligent. Connects to growth mindset with far more substance than the pop version.</div></div></div>
   </div>
 
   <div class="theme-block" data-theme="boards">
     <h3 class="theme">Board dynamics</h3>
-    <div class="item" data-id="cossin-boards"><div class="readbox">&#10003;</div><div><div class="t">High Performance Boards + The Four Pillars of Board Effectiveness <span class="tag">ANCHOR</span></div><div class="m">Didier Cossin, book (2nd ed. 2024) + IMD article &middot; <a href="https://www.imd.org/research-knowledge/articles/the-four-pillars-of-board-effectiveness/">article link</a></div><div class="w">The intellectual frame behind the board program. Worth knowing cold.</div></div></div>
+    <div class="item" data-id="cossin-boards"><div class="readbox">&#10003;</div><div><div class="t">The Four Pillars of Board Effectiveness <span class="tag">ANCHOR</span></div><div class="m">Didier Cossin, IMD &middot; <a href="https://www.imd.org/research-knowledge/articles/the-four-pillars-of-board-effectiveness/">article</a> &middot; book for depth: <em>High Performance Boards</em>, 2nd ed. 2024</div><div class="w">The intellectual frame behind the board program. Worth knowing cold.</div></div></div>
     <div class="item" data-id="eirola-dissent"><div class="readbox">&#10003;</div><div><div class="t">Boardroom Dissent: An Integrative Review</div><div class="m">Eirola et al., Corporate Governance: An International Review, 2025 &middot; <a href="https://onlinelibrary.wiley.com/doi/10.1111/corg.12607">link</a></div><div class="w">Academic state of the art on exactly what you observe in simulations: dissent, chair behavior, board climate.</div><div class="note">Paywalled; access being arranged.</div></div></div>
     <div class="item" data-id="rr-power-boards"><div class="readbox">&#10003;</div><div><div class="t">Power Dynamics on Boards</div><div class="m">Russell Reynolds, article &middot; <a href="https://www.russellreynolds.com/en/insights/articles/power-dynamics-on-boards">link</a></div><div class="w">Five bases of power in the boardroom, dominant voices, silenced dissent. Maps one-to-one onto your simulation feedback vocabulary.</div></div></div>
     <div class="item" data-id="harvard-chair"><div class="readbox">&#10003;</div><div><div class="t">Effective Board Leadership</div><div class="m">Harvard Law School Forum on Corporate Governance, Oct 2025 &middot; <a href="https://corpgov.law.harvard.edu/2025/10/08/effective-board-leadership-the-art-of-doing-it-well-and-the-risks-of-getting-it-wrong/">link</a></div><div class="w">Eight attributes of effective chairs, and the warning signs when board leadership drifts.</div></div></div>
@@ -238,99 +251,304 @@
 
   <div class="theme-block" data-theme="resilience">
     <h3 class="theme">Secure base and resilience</h3>
-    <div class="item" data-id="kohlrieser-dare"><div class="readbox">&#10003;</div><div><div class="t">Care to Dare <span class="tag">ANCHOR</span></div><div class="m">George Kohlrieser, 2012, book</div><div class="w">The secure-base model at the heart of the leadership program. Refresh, do not relearn.</div></div></div>
-    <div class="item" data-id="coutu-resilience"><div class="readbox">&#10003;</div><div><div class="t">How Resilience Works</div><div class="m">Diane Coutu, HBR, 2002</div><div class="w">The seminal resilience piece behind the resilience module.</div></div></div>
+    <div class="item" data-id="kohlrieser-dare"><div class="readbox">&#10003;</div><div><div class="t">Care to Dare <span class="tag">ANCHOR</span></div><div class="m">George Kohlrieser, 2012, book (kept: the program's central model has no article twin)</div><div class="w">The secure-base model at the heart of the leadership program. Refresh, do not relearn; the frameworks card below covers the essentials.</div></div></div>
+    <div class="item" data-id="coutu-resilience"><div class="readbox">&#10003;</div><div><div class="t">How Resilience Works</div><div class="m">Diane Coutu, HBR, 2002 &middot; <a href="https://hbr.org/2002/05/how-resilience-works">article</a> (HBR subscription)</div><div class="w">The seminal resilience piece behind the resilience module.</div></div></div>
   </div>
 
   <div class="theme-block" data-theme="presence">
     <h3 class="theme">Executive presence</h3>
     <div class="item" data-id="hewlett-new-rules"><div class="readbox">&#10003;</div><div><div class="t">The New Rules of Executive Presence <span class="tag">ANCHOR</span></div><div class="m">Sylvia Ann Hewlett, HBR, Jan&ndash;Feb 2024 &middot; <a href="https://hbr.org/2024/01/the-new-rules-of-executive-presence">link</a> (HBR subscription)</div><div class="w">Gravitas, communication, appearance, recalibrated: inclusiveness, listening to learn, and authenticity rising; pedigree fading. For you first, your coachees second.</div></div></div>
-    <div class="item" data-id="woi-presence-revisited"><div class="readbox">&#10003;</div><div><div class="t">Executive Presence, Revisited: How Leadership Is Being Felt, Not Just Seen</div><div class="m">Women of Influence, Jun 2025 &middot; <a href="https://www.womenofinfluence.ca/2025/06/04/executive-presence-revisited-how-leadership-is-being-felt-not-just-seen/">link</a></div><div class="w">A light companion read: presence as felt trust rather than performance, with six grounded practices.</div></div></div>
-    <div class="item" data-id="hewlett-ep-book"><div class="readbox">&#10003;</div><div><div class="t">Executive Presence</div><div class="m">Sylvia Ann Hewlett, 2014, book</div><div class="w">The research base behind the anchor article. Depth option for when this theme becomes central.</div></div></div>
+    <div class="item" data-id="woi-presence-revisited"><div class="readbox">&#10003;</div><div><div class="t">Executive Presence, Revisited: How Leadership Is Being Felt, Not Just Seen</div><div class="m">Women of Influence, Jun 2025 &middot; <a href="https://www.womenofinfluence.ca/2025/06/04/executive-presence-revisited-how-leadership-is-being-felt-not-just-seen/">article</a> &middot; book for depth: Hewlett, <em>Executive Presence</em>, 2014</div><div class="w">A light companion read: presence as felt trust rather than performance, with six grounded practices.</div></div></div>
   </div>
 </section>
 
 <section id="frameworks">
   <h2>Frameworks: the ready reckoner</h2>
-  <p class="lead">One glance before a session. Each card: the idea, when to reach for it, one question it gives you, and its limits. The two marked NEW may be unfamiliar; they earn their place.</p>
+  <p class="lead">One glance before a session. Tap a card to open it: full definition, the picture, when to reach for it, one question, limits, and where to go deeper. The two marked NEW may be unfamiliar; they earn their place.</p>
 
-  <h3 class="theme" style="margin-bottom:12px">In the conversation</h3>
-  <div class="card"><h3>GROW <span class="tag">Whitmore</span></h3>
-    <p><strong>The idea.</strong> Goal, Reality, Options, Will: the default arc for a coaching conversation.<br>
-    <strong>Reach for it</strong> when a conversation wanders or a coachee wants visible structure.<br>
-    <strong>Ask:</strong> "What have you already tried?"<br>
-    <strong>Limits.</strong> Mechanical if followed rigidly, and it assumes the goal is the right one, which is often the real coaching question.</p></div>
-  <div class="card"><h3>Reflective inquiry <span class="tag">Reynolds</span></h3>
-    <p><strong>The idea.</strong> Reflect back what you heard (words, emotion, contradiction) and let the summary do the provoking, instead of stacking clever questions.<br>
-    <strong>Reach for it</strong> when you notice yourself working harder than the coachee.<br>
-    <strong>The move is a statement, not a question:</strong> "You said X, and a minute later Y."<br>
-    <strong>Limits.</strong> Needs precision; a sloppy reflection derails more than a mediocre question.</p></div>
+  <div class="chips" id="fw-chips">
+    <button class="chip active" data-group="all">All</button>
+    <button class="chip" data-group="conversation">In the conversation</button>
+    <button class="chip" data-group="person">The person</button>
+    <button class="chip" data-group="leading">Leading others</button>
+    <button class="chip" data-group="groups">Organizations &amp; groups</button>
+  </div>
 
-  <h3 class="theme" style="margin-bottom:12px">Understanding the person</h3>
-  <div class="card"><h3>Johari Window <span class="tag">Luft &amp; Ingham</span></h3>
-    <p><strong>The idea.</strong> Four panes of self-knowledge: open, blind, hidden, unknown.<br>
-    <strong>Reach for it</strong> in 360 debriefs: the blind pane is what the 360 exists to shrink.<br>
-    <strong>Ask:</strong> "What might others see that you can't?"<br>
-    <strong>Limits.</strong> A static snapshot; says nothing about what to do next.</p></div>
-  <div class="card"><h3>Maslow's hierarchy</h3>
-    <p><strong>The idea.</strong> Needs ordered from survival to self-actualization; unmet lower needs dominate attention.<br>
-    <strong>Reach for it</strong> when a leader's stated ambition conflicts with their current security (role at risk, reorganization).<br>
-    <strong>Ask:</strong> "What feels at stake for you right now, really?"<br>
-    <strong>Limits.</strong> The strict ordering has weak empirical support; a lens, not a law.</p></div>
-  <div class="card"><h3>Achievement, affiliation, power <span class="tag">McClelland</span></h3>
-    <p><strong>The idea.</strong> People are driven by different dominant needs, and leaders over-index on achievement.<br>
-    <strong>Reach for it</strong> when a coachee struggles to delegate or to enjoy leading.<br>
-    <strong>Ask:</strong> "What part of the last win felt best: the result, the relationships, or the influence?"<br>
-    <strong>Limits.</strong> Profiles drift by context; avoid typing people permanently.</p></div>
-  <div class="card"><h3>Attachment theory at work <span class="tag">Bowlby</span></h3>
-    <p><strong>The idea.</strong> Early relational patterns shape how adults respond to support and threat: secure, anxious, avoidant.<br>
-    <strong>Reach for it</strong> when a coachee's reaction to a boss or board seems bigger than the situation.<br>
-    <strong>Ask:</strong> "What do you typically do when support feels uncertain?"<br>
-    <strong>Limits.</strong> Coaching, not therapy; use it to normalize a pattern, never to diagnose.</p></div>
-  <div class="card"><h3>Immunity to Change <span class="tag">Kegan &amp; Lahey</span></h3>
-    <p><strong>The idea.</strong> People don't resist change out of weakness; they are loyal to a hidden competing commitment that protects them from a feared outcome.<br>
-    <strong>Reach for it</strong> when a motivated coachee keeps not doing the thing.<br>
-    <strong>Ask:</strong> "What would you have to risk feeling if you actually changed this?"<br>
-    <strong>Limits.</strong> Takes real time; not a five-minute tool.</p></div>
+  <div class="fw-group" data-group="conversation">
+  <h3 class="theme">In the conversation</h3>
 
-  <h3 class="theme" style="margin-bottom:12px">Leading others</h3>
-  <div class="card"><h3>Situational Leadership <span class="tag">Hersey &amp; Blanchard</span></h3>
-    <p><strong>The idea.</strong> Match style (directing, coaching, supporting, delegating) to the person's competence and commitment for this task.<br>
-    <strong>Reach for it</strong> on the classic "coach or direct?" dilemma.<br>
-    <strong>Ask:</strong> "What does this person need from you on this task right now: direction or trust?"<br>
-    <strong>Limits.</strong> Readiness is task-specific and moves; reassess constantly.</p></div>
-  <div class="card"><h3>Secure Base Leadership <span class="tag">Kohlrieser</span></h3>
-    <p><strong>The idea.</strong> Leaders who combine caring and daring become the base from which people take risks.<br>
-    <strong>Reach for it</strong> with leaders who are either all warmth or all challenge.<br>
-    <strong>Ask:</strong> "Who is your secure base, and whose secure base are you?"<br>
-    <strong>Limits.</strong> Familiar program vocabulary; push past the words to actual behaviors.</p></div>
-  <div class="card"><h3>Psychological safety <span class="tag">Edmondson</span></h3>
-    <p><strong>The idea.</strong> The shared belief that interpersonal risk-taking is safe; built by framing work as learning, admitting fallibility, and asking questions.<br>
-    <strong>Reach for it</strong> when a coachee's team is quiet, compliant, or hiding problems.<br>
-    <strong>Ask:</strong> "When did someone last bring you bad news early, and what happened to them?"<br>
-    <strong>Limits.</strong> Safety is not comfort or low standards; pair it with accountability.</p></div>
-  <div class="card"><h3>SCARF <span class="tag">Rock &middot; NEW</span></h3>
-    <p><strong>The idea.</strong> Five social triggers the brain treats like survival threats: status, certainty, autonomy, relatedness, fairness.<br>
-    <strong>Reach for it</strong> to decode why a reasonable change produced an unreasonable reaction.<br>
-    <strong>Ask:</strong> "Which of the five felt attacked?"<br>
-    <strong>Limits.</strong> The neuroscience framing is looser than it sounds; the checklist is the value.</p></div>
-  <div class="card"><h3>Participative decision model <span class="tag">Vroom &amp; Yetton</span></h3>
-    <p><strong>The idea.</strong> Decide alone, consult, or decide together, chosen by decision significance, information location, and needed commitment.<br>
-    <strong>Reach for it</strong> with leaders who default to one mode for every decision.<br>
-    <strong>Ask:</strong> "Who holds the information, and whose commitment do you need?"<br>
-    <strong>Limits.</strong> Assumes time to choose a mode; crises collapse it.</p></div>
+  <div class="card fw-card"><div class="fw-head"><h3>GROW <span class="tag">Whitmore</span></h3><span class="caret">&#9660;</span></div>
+    <p class="fw-oneline">Goal, Reality, Options, Will: the default arc for a coaching conversation.</p>
+    <div class="fw-detail">
+      <p><strong>Definition.</strong> A four-stage conversation structure: agree what the coachee wants (Goal), examine what is actually happening (Reality), generate possibilities without judging them (Options), and commit to specific action (Will). Popularized by Sir John Whitmore in <em>Coaching for Performance</em>; the most widely used coaching model in organizations.</p>
+      <div class="fw-diagram"><svg viewBox="0 0 420 80" xmlns="http://www.w3.org/2000/svg"><g font-family="Segoe UI, sans-serif" font-size="13" fill="#2b2926" text-anchor="middle">
+        <rect x="8" y="18" width="88" height="44" rx="8" fill="#e3f0ef" stroke="#0e6f6a"/><text x="52" y="36" font-weight="bold" fill="#0a524e">Goal</text><text x="52" y="53" font-size="10" fill="#6b655c">what do you want?</text>
+        <path d="M98 40 h10" stroke="#0e6f6a" stroke-width="2" marker-end="none"/><text x="105" y="45" fill="#0e6f6a">&#8594;</text>
+        <rect x="113" y="18" width="88" height="44" rx="8" fill="#e3f0ef" stroke="#0e6f6a"/><text x="157" y="36" font-weight="bold" fill="#0a524e">Reality</text><text x="157" y="53" font-size="10" fill="#6b655c">what is happening?</text>
+        <text x="210" y="45" fill="#0e6f6a">&#8594;</text>
+        <rect x="218" y="18" width="88" height="44" rx="8" fill="#e3f0ef" stroke="#0e6f6a"/><text x="262" y="36" font-weight="bold" fill="#0a524e">Options</text><text x="262" y="53" font-size="10" fill="#6b655c">what could you do?</text>
+        <text x="315" y="45" fill="#0e6f6a">&#8594;</text>
+        <rect x="323" y="18" width="88" height="44" rx="8" fill="#fdf6e9" stroke="#b98a2f"/><text x="367" y="36" font-weight="bold" fill="#b98a2f">Will</text><text x="367" y="53" font-size="10" fill="#6b655c">what will you do?</text>
+      </g></svg></div>
+      <p><strong>Reach for it</strong> when a conversation wanders or a coachee wants visible structure.<br>
+      <strong>Ask:</strong> "What have you already tried?"<br>
+      <strong>Limits.</strong> Mechanical if followed rigidly, and it assumes the goal is the right one, which is often the real coaching question.</p>
+      <p class="golinks"><strong>Go deeper:</strong> <a href="https://www.performanceconsultants.com/grow-model">The GROW model (Performance Consultants)</a></p>
+    </div></div>
 
-  <h3 class="theme" style="margin-bottom:12px">Organizations and groups</h3>
-  <div class="card"><h3>Levels of culture <span class="tag">Schein</span></h3>
-    <p><strong>The idea.</strong> Artifacts on the surface, espoused values beneath, underlying assumptions at the bottom, and the bottom layer wins.<br>
-    <strong>Reach for it</strong> when a change effort keeps bouncing off "how things are done here."<br>
-    <strong>Ask:</strong> "What does the organization actually do when no one is watching?"<br>
-    <strong>Limits.</strong> Assumptions are inferred, not observed; hold hypotheses lightly.</p></div>
-  <div class="card"><h3>Basic assumptions in groups <span class="tag">Bion &middot; NEW</span></h3>
-    <p><strong>The idea.</strong> Under pressure, groups slide from work mode into dependency (waiting for a savior), fight-flight (an enemy to blame), or pairing (hoping two members will fix it).<br>
-    <strong>Reach for it</strong> when observing board simulations: name the mode, not the individuals.<br>
-    <strong>Ask yourself:</strong> "What is this group doing instead of the task?"<br>
-    <strong>Limits.</strong> Tavistock language can alienate; translate before using it with participants.</p></div>
+  <div class="card fw-card"><div class="fw-head"><h3>Reflective inquiry <span class="tag">Reynolds</span></h3><span class="caret">&#9660;</span></div>
+    <p class="fw-oneline">Reflect back what you heard and let the summary do the provoking, instead of stacking clever questions.</p>
+    <div class="fw-detail">
+      <p><strong>Definition.</strong> A coaching stance in which the coach's main instrument is the reflection: playing back the coachee's words, emotions, gestures, and contradictions so the coachee can examine their own thinking from the outside. Questions follow reflections rather than lead them. Marcia Reynolds' <em>Coach the Person, Not the Problem</em> is the definitive treatment.</p>
+      <div class="fw-diagram"><svg viewBox="0 0 420 150" xmlns="http://www.w3.org/2000/svg"><g font-family="Segoe UI, sans-serif" font-size="12" fill="#2b2926" text-anchor="middle">
+        <rect x="20" y="20" width="150" height="40" rx="8" fill="#e3f0ef" stroke="#0e6f6a"/><text x="95" y="40" font-weight="bold" fill="#0a524e">Coachee speaks</text><text x="95" y="54" font-size="10" fill="#6b655c">words, emotion, contradiction</text>
+        <path d="M170 40 C 210 40 210 40 248 40" stroke="#0e6f6a" stroke-width="1.5" fill="none"/><text x="210" y="34" fill="#0e6f6a" font-size="14">&#8594;</text>
+        <rect x="250" y="20" width="150" height="40" rx="8" fill="#e3f0ef" stroke="#0e6f6a"/><text x="325" y="40" font-weight="bold" fill="#0a524e">Coach reflects back</text><text x="325" y="54" font-size="10" fill="#6b655c">a mirror, not a question</text>
+        <path d="M325 60 C 325 95 245 100 218 100" stroke="#0e6f6a" stroke-width="1.5" fill="none"/>
+        <rect x="135" y="80" width="150" height="40" rx="8" fill="#fdf6e9" stroke="#b98a2f"/><text x="210" y="100" font-weight="bold" fill="#b98a2f">New insight</text><text x="210" y="114" font-size="10" fill="#6b655c">the coachee sees their thinking</text>
+        <path d="M135 100 C 60 100 95 70 95 62" stroke="#0e6f6a" stroke-width="1.5" fill="none"/><text x="80" y="88" fill="#0e6f6a" font-size="14">&#8593;</text>
+      </g></svg></div>
+      <p><strong>Reach for it</strong> when you notice yourself working harder than the coachee.<br>
+      <strong>The move is a statement, not a question:</strong> "You said X, and a minute later Y."<br>
+      <strong>Limits.</strong> Needs precision; a sloppy reflection derails more than a mediocre question.</p>
+      <p class="golinks"><strong>Go deeper:</strong> <a href="https://coactive.com/blog/reflective-inquiry/">Reflective inquiry (Co-Active)</a> <a href="https://covisioning.com/coach-the-person-book/">The book's home (Covisioning)</a></p>
+    </div></div>
+  </div>
+
+  <div class="fw-group" data-group="person">
+  <h3 class="theme">Understanding the person</h3>
+
+  <div class="card fw-card"><div class="fw-head"><h3>Johari Window <span class="tag">Luft &amp; Ingham</span></h3><span class="caret">&#9660;</span></div>
+    <p class="fw-oneline">Four panes of self-knowledge: open, blind, hidden, unknown.</p>
+    <div class="fw-detail">
+      <p><strong>Definition.</strong> A two-by-two map of self-awareness built from two questions: what is known to me, and what is known to others. Feedback shrinks the blind pane; disclosure shrinks the hidden pane; both grow the open pane where trust and effectiveness live.</p>
+      <div class="fw-diagram"><svg viewBox="0 0 420 210" xmlns="http://www.w3.org/2000/svg"><g font-family="Segoe UI, sans-serif" font-size="12" fill="#2b2926" text-anchor="middle">
+        <text x="185" y="16" font-size="11" fill="#6b655c">Known to self</text><text x="330" y="16" font-size="11" fill="#6b655c">Not known to self</text>
+        <text x="55" y="80" font-size="11" fill="#6b655c">Known</text><text x="55" y="94" font-size="11" fill="#6b655c">to others</text>
+        <text x="55" y="155" font-size="11" fill="#6b655c">Not known</text><text x="55" y="169" font-size="11" fill="#6b655c">to others</text>
+        <rect x="110" y="25" width="145" height="88" fill="#e3f0ef" stroke="#0e6f6a"/><text x="182" y="66" font-weight="bold" fill="#0a524e">OPEN</text><text x="182" y="82" font-size="10" fill="#6b655c">where trust lives</text>
+        <rect x="255" y="25" width="145" height="88" fill="#fdf6e9" stroke="#b98a2f"/><text x="327" y="66" font-weight="bold" fill="#b98a2f">BLIND</text><text x="327" y="82" font-size="10" fill="#6b655c">what the 360 shrinks</text>
+        <rect x="110" y="113" width="145" height="88" fill="#faf7f2" stroke="#0e6f6a"/><text x="182" y="154" font-weight="bold" fill="#0a524e">HIDDEN</text><text x="182" y="170" font-size="10" fill="#6b655c">what disclosure shrinks</text>
+        <rect x="255" y="113" width="145" height="88" fill="#faf7f2" stroke="#6b655c"/><text x="327" y="154" font-weight="bold" fill="#6b655c">UNKNOWN</text><text x="327" y="170" font-size="10" fill="#6b655c">potential</text>
+      </g></svg></div>
+      <p><strong>Reach for it</strong> in 360 debriefs: the blind pane is what the 360 exists to shrink.<br>
+      <strong>Ask:</strong> "What might others see that you can't?"<br>
+      <strong>Limits.</strong> A static snapshot; says nothing about what to do next.</p>
+      <p class="golinks"><strong>Go deeper:</strong> <a href="https://en.wikipedia.org/wiki/Johari_window">Johari window (overview)</a></p>
+    </div></div>
+
+  <div class="card fw-card"><div class="fw-head"><h3>Maslow's hierarchy</h3><span class="caret">&#9660;</span></div>
+    <p class="fw-oneline">Needs ordered from survival to self-actualization; unmet lower needs dominate attention.</p>
+    <div class="fw-detail">
+      <p><strong>Definition.</strong> Motivation as a rough ladder: physiological needs, safety, belonging, esteem, and self-actualization. The coaching value is the reminder that a threatened lower need (job security, belonging in a new team) will quietly dominate a leader's attention however lofty their stated goals.</p>
+      <div class="fw-diagram"><svg viewBox="0 0 420 190" xmlns="http://www.w3.org/2000/svg"><g font-family="Segoe UI, sans-serif" font-size="12" fill="#2b2926">
+        <polygon points="210,15 305,170 115,170" fill="#e3f0ef" stroke="#0e6f6a"/>
+        <line x1="192" y1="45" x2="228" y2="45" stroke="#0e6f6a"/><line x1="173" y1="76" x2="247" y2="76" stroke="#0e6f6a"/><line x1="154" y1="107" x2="266" y2="107" stroke="#0e6f6a"/><line x1="135" y1="138" x2="285" y2="138" stroke="#0e6f6a"/>
+        <text x="315" y="38" fill="#b98a2f" font-weight="bold">Self-actualization</text>
+        <text x="315" y="66" fill="#0a524e">Esteem</text>
+        <text x="315" y="97" fill="#0a524e">Belonging</text>
+        <text x="315" y="128" fill="#0a524e">Safety</text>
+        <text x="315" y="160" fill="#0a524e">Physiological</text>
+        <line x1="310" y1="33" x2="252" y2="33" stroke="#e8e2d8"/><line x1="310" y1="61" x2="235" y2="61" stroke="#e8e2d8"/><line x1="310" y1="92" x2="220" y2="92" stroke="#e8e2d8"/><line x1="310" y1="123" x2="240" y2="123" stroke="#e8e2d8"/><line x1="310" y1="155" x2="290" y2="155" stroke="#e8e2d8"/>
+      </g></svg></div>
+      <p><strong>Reach for it</strong> when a leader's stated ambition conflicts with their current security (role at risk, reorganization).<br>
+      <strong>Ask:</strong> "What feels at stake for you right now, really?"<br>
+      <strong>Limits.</strong> The strict ordering has weak empirical support; a lens, not a law.</p>
+      <p class="golinks"><strong>Go deeper:</strong> <a href="https://www.simplypsychology.org/maslow.html">Maslow's hierarchy (Simply Psychology)</a></p>
+    </div></div>
+
+  <div class="card fw-card"><div class="fw-head"><h3>Achievement, affiliation, power <span class="tag">McClelland</span></h3><span class="caret">&#9660;</span></div>
+    <p class="fw-oneline">People are driven by different dominant needs, and leaders over-index on achievement.</p>
+    <div class="fw-detail">
+      <p><strong>Definition.</strong> David McClelland's learned-needs theory: adults develop a dominant motivational need for achievement (mastery, results), affiliation (belonging, harmony), or power (influence, impact), and it shapes what energizes and what drains them. Effective senior leadership often requires shifting weight from achievement toward socialized power: impact through others.</p>
+      <div class="fw-diagram"><svg viewBox="0 0 420 150" xmlns="http://www.w3.org/2000/svg"><g font-family="Segoe UI, sans-serif" font-size="12" text-anchor="middle">
+        <circle cx="90" cy="65" r="46" fill="#e3f0ef" stroke="#0e6f6a"/><text x="90" y="60" font-weight="bold" fill="#0a524e">Achievement</text><text x="90" y="76" font-size="10" fill="#6b655c">results, mastery</text>
+        <circle cx="210" cy="65" r="46" fill="#e3f0ef" stroke="#0e6f6a"/><text x="210" y="60" font-weight="bold" fill="#0a524e">Affiliation</text><text x="210" y="76" font-size="10" fill="#6b655c">belonging, harmony</text>
+        <circle cx="330" cy="65" r="46" fill="#fdf6e9" stroke="#b98a2f"/><text x="330" y="60" font-weight="bold" fill="#b98a2f">Power</text><text x="330" y="76" font-size="10" fill="#6b655c">influence through others</text>
+        <text x="210" y="138" font-size="11" fill="#6b655c">the dominant need drives behavior, mostly unseen</text>
+      </g></svg></div>
+      <p><strong>Reach for it</strong> when a coachee struggles to delegate or to enjoy leading.<br>
+      <strong>Ask:</strong> "What part of the last win felt best: the result, the relationships, or the influence?"<br>
+      <strong>Limits.</strong> Profiles drift by context; avoid typing people permanently.</p>
+      <p class="golinks"><strong>Go deeper:</strong> <a href="https://en.wikipedia.org/wiki/Need_theory">McClelland's need theory (overview)</a></p>
+    </div></div>
+
+  <div class="card fw-card"><div class="fw-head"><h3>Attachment theory at work <span class="tag">Bowlby</span></h3><span class="caret">&#9660;</span></div>
+    <p class="fw-oneline">Early relational patterns shape how adults respond to support and threat: secure, anxious, avoidant.</p>
+    <div class="fw-detail">
+      <p><strong>Definition.</strong> John Bowlby's insight that humans form internal working models of relationships, carried into adulthood: secure (support is available, so risk is possible), anxious (support is uncertain, so seek reassurance), avoidant (support is unreliable, so go it alone). At work these patterns surface under pressure, in how leaders relate to bosses, boards, and their own teams.</p>
+      <div class="fw-diagram"><svg viewBox="0 0 420 210" xmlns="http://www.w3.org/2000/svg"><g font-family="Segoe UI, sans-serif" font-size="12" fill="#2b2926" text-anchor="middle">
+        <line x1="90" y1="180" x2="410" y2="180" stroke="#6b655c"/><line x1="90" y1="180" x2="90" y2="15" stroke="#6b655c"/>
+        <text x="250" y="202" font-size="11" fill="#6b655c">Avoidance of closeness &#8594;</text>
+        <text x="30" y="100" font-size="11" fill="#6b655c" transform="rotate(-90 30 100)">Anxiety about support &#8594;</text>
+        <rect x="100" y="100" width="145" height="70" rx="8" fill="#e3f0ef" stroke="#0e6f6a"/><text x="172" y="130" font-weight="bold" fill="#0a524e">Secure</text><text x="172" y="146" font-size="10" fill="#6b655c">asks, risks, recovers</text>
+        <rect x="255" y="100" width="145" height="70" rx="8" fill="#faf7f2" stroke="#0e6f6a"/><text x="327" y="130" font-weight="bold" fill="#0a524e">Avoidant</text><text x="327" y="146" font-size="10" fill="#6b655c">goes it alone</text>
+        <rect x="100" y="20" width="145" height="70" rx="8" fill="#faf7f2" stroke="#0e6f6a"/><text x="172" y="50" font-weight="bold" fill="#0a524e">Anxious</text><text x="172" y="66" font-size="10" fill="#6b655c">seeks reassurance</text>
+        <rect x="255" y="20" width="145" height="70" rx="8" fill="#fdf6e9" stroke="#b98a2f"/><text x="327" y="50" font-weight="bold" fill="#b98a2f">Fearful-avoidant</text><text x="327" y="66" font-size="10" fill="#6b655c">wants and dreads closeness</text>
+      </g></svg></div>
+      <p><strong>Reach for it</strong> when a coachee's reaction to a boss or board seems bigger than the situation.<br>
+      <strong>Ask:</strong> "What do you typically do when support feels uncertain?"<br>
+      <strong>Limits.</strong> Coaching, not therapy; use it to normalize a pattern, never to diagnose.</p>
+      <p class="golinks"><strong>Go deeper:</strong> <a href="https://www.simplypsychology.org/attachment.html">Attachment theory (Simply Psychology)</a></p>
+    </div></div>
+
+  <div class="card fw-card"><div class="fw-head"><h3>Immunity to Change <span class="tag">Kegan &amp; Lahey</span></h3><span class="caret">&#9660;</span></div>
+    <p class="fw-oneline">People don't resist change out of weakness; they are loyal to a hidden competing commitment.</p>
+    <div class="fw-detail">
+      <p><strong>Definition.</strong> A diagnostic map with four columns: the improvement goal, the behaviors that work against it, the hidden competing commitment those behaviors serve (usually protection from a feared outcome), and the big assumption that makes the fear feel true. Change happens by testing the assumption, not by trying harder.</p>
+      <div class="fw-diagram"><svg viewBox="0 0 420 150" xmlns="http://www.w3.org/2000/svg"><g font-family="Segoe UI, sans-serif" font-size="11" fill="#2b2926" text-anchor="middle">
+        <rect x="8" y="25" width="92" height="80" rx="8" fill="#e3f0ef" stroke="#0e6f6a"/><text x="54" y="15" font-size="10" fill="#6b655c">1</text><text x="54" y="58" font-weight="bold" fill="#0a524e">Commitment</text><text x="54" y="74" font-size="10" fill="#6b655c">the goal</text>
+        <text x="105" y="70" fill="#0e6f6a">&#8594;</text>
+        <rect x="112" y="25" width="92" height="80" rx="8" fill="#e3f0ef" stroke="#0e6f6a"/><text x="158" y="52" font-weight="bold" fill="#0a524e">What I do</text><text x="158" y="66" font-weight="bold" fill="#0a524e">instead</text><text x="158" y="84" font-size="10" fill="#6b655c">observable</text>
+        <text x="209" y="70" fill="#0e6f6a">&#8594;</text>
+        <rect x="216" y="25" width="92" height="80" rx="8" fill="#fdf6e9" stroke="#b98a2f"/><text x="262" y="52" font-weight="bold" fill="#b98a2f">Competing</text><text x="262" y="66" font-weight="bold" fill="#b98a2f">commitment</text><text x="262" y="84" font-size="10" fill="#6b655c">hidden, protective</text>
+        <text x="313" y="70" fill="#0e6f6a">&#8594;</text>
+        <rect x="320" y="25" width="92" height="80" rx="8" fill="#faf7f2" stroke="#6b655c"/><text x="366" y="58" font-weight="bold" fill="#6b655c">Big assumption</text><text x="366" y="74" font-size="10" fill="#6b655c">test this</text>
+        <text x="210" y="135" font-size="11" fill="#6b655c">the map runs left to right; the work runs right to left</text>
+      </g></svg></div>
+      <p><strong>Reach for it</strong> when a motivated coachee keeps not doing the thing.<br>
+      <strong>Ask:</strong> "What would you have to risk feeling if you actually changed this?"<br>
+      <strong>Limits.</strong> Takes real time; not a five-minute tool.</p>
+      <p class="golinks"><strong>Go deeper:</strong> <a href="https://hbr.org/2001/11/the-real-reason-people-wont-change">The Real Reason People Won't Change (HBR)</a></p>
+    </div></div>
+  </div>
+
+  <div class="fw-group" data-group="leading">
+  <h3 class="theme">Leading others</h3>
+
+  <div class="card fw-card"><div class="fw-head"><h3>Situational Leadership <span class="tag">Hersey &amp; Blanchard</span></h3><span class="caret">&#9660;</span></div>
+    <p class="fw-oneline">Match style (directing, coaching, supporting, delegating) to the person's readiness for this task.</p>
+    <div class="fw-detail">
+      <p><strong>Definition.</strong> Leadership style is not a personality but a choice along two dials: how much direction you give and how much support. The right setting depends on the person's competence and commitment for this specific task, so the same person may need directing on one task and delegating on another.</p>
+      <div class="fw-diagram"><svg viewBox="0 0 420 210" xmlns="http://www.w3.org/2000/svg"><g font-family="Segoe UI, sans-serif" font-size="12" fill="#2b2926" text-anchor="middle">
+        <line x1="90" y1="180" x2="410" y2="180" stroke="#6b655c"/><line x1="90" y1="180" x2="90" y2="15" stroke="#6b655c"/>
+        <text x="250" y="202" font-size="11" fill="#6b655c">Directive behavior &#8594;</text>
+        <text x="30" y="100" font-size="11" fill="#6b655c" transform="rotate(-90 30 100)">Supportive behavior &#8594;</text>
+        <rect x="100" y="20" width="145" height="70" rx="8" fill="#e3f0ef" stroke="#0e6f6a"/><text x="172" y="50" font-weight="bold" fill="#0a524e">Supporting</text><text x="172" y="66" font-size="10" fill="#6b655c">can do, doubts itself</text>
+        <rect x="255" y="20" width="145" height="70" rx="8" fill="#e3f0ef" stroke="#0e6f6a"/><text x="327" y="50" font-weight="bold" fill="#0a524e">Coaching</text><text x="327" y="66" font-size="10" fill="#6b655c">willing, still learning</text>
+        <rect x="100" y="100" width="145" height="70" rx="8" fill="#fdf6e9" stroke="#b98a2f"/><text x="172" y="130" font-weight="bold" fill="#b98a2f">Delegating</text><text x="172" y="146" font-size="10" fill="#6b655c">able and committed</text>
+        <rect x="255" y="100" width="145" height="70" rx="8" fill="#faf7f2" stroke="#0e6f6a"/><text x="327" y="130" font-weight="bold" fill="#0a524e">Directing</text><text x="327" y="146" font-size="10" fill="#6b655c">new to the task</text>
+      </g></svg></div>
+      <p><strong>Reach for it</strong> on the classic "coach or direct?" dilemma.<br>
+      <strong>Ask:</strong> "What does this person need from you on this task right now: direction or trust?"<br>
+      <strong>Limits.</strong> Readiness is task-specific and moves; reassess constantly.</p>
+      <p class="golinks"><strong>Go deeper:</strong> <a href="https://situational.com/situational-leadership/">Situational Leadership (Center for Leadership Studies)</a></p>
+    </div></div>
+
+  <div class="card fw-card"><div class="fw-head"><h3>Secure Base Leadership <span class="tag">Kohlrieser</span></h3><span class="caret">&#9660;</span></div>
+    <p class="fw-oneline">Leaders who combine caring and daring become the base from which people take risks.</p>
+    <div class="fw-detail">
+      <p><strong>Definition.</strong> Drawing on attachment theory and hostage negotiation, George Kohlrieser argues a leader's job is to be a secure base: enough bonding that people feel safe, enough challenge that they leave the comfort zone. Care without dare protects but doesn't stretch; dare without care drives but doesn't hold.</p>
+      <div class="fw-diagram"><svg viewBox="0 0 420 210" xmlns="http://www.w3.org/2000/svg"><g font-family="Segoe UI, sans-serif" font-size="12" fill="#2b2926" text-anchor="middle">
+        <line x1="90" y1="180" x2="410" y2="180" stroke="#6b655c"/><line x1="90" y1="180" x2="90" y2="15" stroke="#6b655c"/>
+        <text x="250" y="202" font-size="11" fill="#6b655c">Daring (challenge) &#8594;</text>
+        <text x="30" y="100" font-size="11" fill="#6b655c" transform="rotate(-90 30 100)">Caring (bonding) &#8594;</text>
+        <rect x="100" y="20" width="145" height="70" rx="8" fill="#faf7f2" stroke="#0e6f6a"/><text x="172" y="50" font-weight="bold" fill="#0a524e">Protects</text><text x="172" y="66" font-size="10" fill="#6b655c">safe but unstretched</text>
+        <rect x="255" y="20" width="145" height="70" rx="8" fill="#fdf6e9" stroke="#b98a2f"/><text x="327" y="50" font-weight="bold" fill="#b98a2f">Secure base</text><text x="327" y="66" font-size="10" fill="#6b655c">safe enough to risk</text>
+        <rect x="100" y="100" width="145" height="70" rx="8" fill="#faf7f2" stroke="#6b655c"/><text x="172" y="130" font-weight="bold" fill="#6b655c">Absent</text><text x="172" y="146" font-size="10" fill="#6b655c">neither held nor moved</text>
+        <rect x="255" y="100" width="145" height="70" rx="8" fill="#faf7f2" stroke="#0e6f6a"/><text x="327" y="130" font-weight="bold" fill="#0a524e">Drives</text><text x="327" y="146" font-size="10" fill="#6b655c">pushed but not held</text>
+      </g></svg></div>
+      <p><strong>Reach for it</strong> with leaders who are either all warmth or all challenge.<br>
+      <strong>Ask:</strong> "Who is your secure base, and whose secure base are you?"<br>
+      <strong>Limits.</strong> Familiar program vocabulary; push past the words to actual behaviors.</p>
+      <p class="golinks"><strong>Go deeper:</strong> <a href="https://en.wikipedia.org/wiki/George_Kohlrieser">Kohlrieser and secure base leadership (overview)</a></p>
+    </div></div>
+
+  <div class="card fw-card"><div class="fw-head"><h3>Psychological safety <span class="tag">Edmondson</span></h3><span class="caret">&#9660;</span></div>
+    <p class="fw-oneline">The shared belief that interpersonal risk-taking is safe.</p>
+    <div class="fw-detail">
+      <p><strong>Definition.</strong> Amy Edmondson's finding that team learning depends on a shared belief that speaking up, admitting error, and asking questions will not be punished. Crucially it pairs with standards: high safety plus high standards produces learning; high safety alone produces comfort.</p>
+      <div class="fw-diagram"><svg viewBox="0 0 420 210" xmlns="http://www.w3.org/2000/svg"><g font-family="Segoe UI, sans-serif" font-size="12" fill="#2b2926" text-anchor="middle">
+        <line x1="90" y1="180" x2="410" y2="180" stroke="#6b655c"/><line x1="90" y1="180" x2="90" y2="15" stroke="#6b655c"/>
+        <text x="250" y="202" font-size="11" fill="#6b655c">Performance standards &#8594;</text>
+        <text x="30" y="100" font-size="11" fill="#6b655c" transform="rotate(-90 30 100)">Psychological safety &#8594;</text>
+        <rect x="100" y="20" width="145" height="70" rx="8" fill="#faf7f2" stroke="#0e6f6a"/><text x="172" y="50" font-weight="bold" fill="#0a524e">Comfort</text><text x="172" y="66" font-size="10" fill="#6b655c">pleasant, static</text>
+        <rect x="255" y="20" width="145" height="70" rx="8" fill="#fdf6e9" stroke="#b98a2f"/><text x="327" y="50" font-weight="bold" fill="#b98a2f">Learning</text><text x="327" y="66" font-size="10" fill="#6b655c">candor + ambition</text>
+        <rect x="100" y="100" width="145" height="70" rx="8" fill="#faf7f2" stroke="#6b655c"/><text x="172" y="130" font-weight="bold" fill="#6b655c">Apathy</text><text x="172" y="146" font-size="10" fill="#6b655c">disengaged</text>
+        <rect x="255" y="100" width="145" height="70" rx="8" fill="#faf7f2" stroke="#0e6f6a"/><text x="327" y="130" font-weight="bold" fill="#0a524e">Anxiety</text><text x="327" y="146" font-size="10" fill="#6b655c">silence under pressure</text>
+      </g></svg></div>
+      <p><strong>Reach for it</strong> when a coachee's team is quiet, compliant, or hiding problems.<br>
+      <strong>Ask:</strong> "When did someone last bring you bad news early, and what happened to them?"<br>
+      <strong>Limits.</strong> Safety is not comfort or low standards; pair it with accountability.</p>
+      <p class="golinks"><strong>Go deeper:</strong> <a href="https://hbr.org/2023/02/what-is-psychological-safety">What is psychological safety? (HBR)</a> <a href="https://en.wikipedia.org/wiki/Psychological_safety">Overview</a></p>
+    </div></div>
+
+  <div class="card fw-card"><div class="fw-head"><h3>SCARF <span class="tag">Rock &middot; NEW</span></h3><span class="caret">&#9660;</span></div>
+    <p class="fw-oneline">Five social triggers the brain treats like survival threats.</p>
+    <div class="fw-detail">
+      <p><strong>Definition.</strong> David Rock's model of the five social domains the brain monitors like physical threats: status, certainty, autonomy, relatedness, fairness. A threat in any domain narrows thinking and triggers defense; a reward broadens it. Useful shorthand for why a "reasonable" reorganization lands like an attack.</p>
+      <div class="fw-diagram"><svg viewBox="0 0 420 95" xmlns="http://www.w3.org/2000/svg"><g font-family="Segoe UI, sans-serif" font-size="11" fill="#2b2926" text-anchor="middle">
+        <rect x="8" y="20" width="74" height="42" rx="20" fill="#e3f0ef" stroke="#0e6f6a"/><text x="45" y="45" font-weight="bold" fill="#0a524e">Status</text>
+        <rect x="90" y="20" width="74" height="42" rx="20" fill="#e3f0ef" stroke="#0e6f6a"/><text x="127" y="45" font-weight="bold" fill="#0a524e">Certainty</text>
+        <rect x="172" y="20" width="74" height="42" rx="20" fill="#e3f0ef" stroke="#0e6f6a"/><text x="209" y="45" font-weight="bold" fill="#0a524e">Autonomy</text>
+        <rect x="254" y="20" width="74" height="42" rx="20" fill="#e3f0ef" stroke="#0e6f6a"/><text x="291" y="45" font-weight="bold" fill="#0a524e">Relatedness</text>
+        <rect x="336" y="20" width="74" height="42" rx="20" fill="#e3f0ef" stroke="#0e6f6a"/><text x="373" y="45" font-weight="bold" fill="#0a524e">Fairness</text>
+        <text x="210" y="85" font-size="11" fill="#6b655c">each one: threat narrows thinking, reward opens it</text>
+      </g></svg></div>
+      <p><strong>Reach for it</strong> to decode why a reasonable change produced an unreasonable reaction.<br>
+      <strong>Ask:</strong> "Which of the five felt attacked?"<br>
+      <strong>Limits.</strong> The neuroscience framing is looser than it sounds; the checklist is the value.</p>
+      <p class="golinks"><strong>Go deeper:</strong> <a href="https://neuroleadership.com/your-brain-at-work/scarf-model-motivate-your-employees/">The SCARF model (NeuroLeadership Institute)</a></p>
+    </div></div>
+
+  <div class="card fw-card"><div class="fw-head"><h3>Participative decision model <span class="tag">Vroom &amp; Yetton</span></h3><span class="caret">&#9660;</span></div>
+    <p class="fw-oneline">Decide alone, consult, or decide together, chosen deliberately, not by habit.</p>
+    <div class="fw-detail">
+      <p><strong>Definition.</strong> A decision about the decision: how much participation this particular choice needs, based on its significance, where the information sits, and whose commitment the outcome requires. The model's value is making the mode a conscious choice instead of a personality default.</p>
+      <div class="fw-diagram"><svg viewBox="0 0 420 100" xmlns="http://www.w3.org/2000/svg"><g font-family="Segoe UI, sans-serif" font-size="10" fill="#2b2926" text-anchor="middle">
+        <line x1="20" y1="45" x2="400" y2="45" stroke="#0e6f6a" stroke-width="2"/>
+        <circle cx="40" cy="45" r="5" fill="#0e6f6a"/><text x="40" y="30">Decide</text><text x="40" y="66" fill="#6b655c">alone</text>
+        <circle cx="130" cy="45" r="5" fill="#0e6f6a"/><text x="130" y="30">Consult</text><text x="130" y="66" fill="#6b655c">one to one</text>
+        <circle cx="220" cy="45" r="5" fill="#0e6f6a"/><text x="220" y="30">Consult</text><text x="220" y="66" fill="#6b655c">the group</text>
+        <circle cx="310" cy="45" r="5" fill="#0e6f6a"/><text x="310" y="30">Facilitate</text><text x="310" y="66" fill="#6b655c">decide together</text>
+        <circle cx="390" cy="45" r="5" fill="#b98a2f"/><text x="390" y="30" fill="#b98a2f">Delegate</text><text x="390" y="66" fill="#6b655c">team owns it</text>
+        <text x="210" y="92" font-size="11" fill="#6b655c">leader control &#8594; team ownership</text>
+      </g></svg></div>
+      <p><strong>Reach for it</strong> with leaders who default to one mode for every decision.<br>
+      <strong>Ask:</strong> "Who holds the information, and whose commitment do you need?"<br>
+      <strong>Limits.</strong> Assumes time to choose a mode; crises collapse it.</p>
+      <p class="golinks"><strong>Go deeper:</strong> <a href="https://en.wikipedia.org/wiki/Vroom%E2%80%93Yetton_decision_model">Vroom-Yetton model (overview)</a></p>
+    </div></div>
+  </div>
+
+  <div class="fw-group" data-group="groups">
+  <h3 class="theme">Organizations and groups</h3>
+
+  <div class="card fw-card"><div class="fw-head"><h3>Levels of culture <span class="tag">Schein</span></h3><span class="caret">&#9660;</span></div>
+    <p class="fw-oneline">Artifacts on the surface, espoused values beneath, underlying assumptions at the bottom, and the bottom layer wins.</p>
+    <div class="fw-detail">
+      <p><strong>Definition.</strong> Edgar Schein's three-level model of organizational culture: what you can see (artifacts: offices, rituals, org charts), what people say they believe (espoused values), and what they actually assume without noticing (underlying assumptions). Change efforts that address only the top layers bounce off the bottom one.</p>
+      <div class="fw-diagram"><svg viewBox="0 0 420 170" xmlns="http://www.w3.org/2000/svg"><g font-family="Segoe UI, sans-serif" font-size="12" fill="#2b2926" text-anchor="middle">
+        <rect x="40" y="15" width="280" height="42" rx="6" fill="#e3f0ef" stroke="#0e6f6a"/><text x="180" y="33" font-weight="bold" fill="#0a524e">Artifacts</text><text x="180" y="49" font-size="10" fill="#6b655c">what you see and hear</text>
+        <rect x="40" y="63" width="280" height="42" rx="6" fill="#faf7f2" stroke="#0e6f6a"/><text x="180" y="81" font-weight="bold" fill="#0a524e">Espoused values</text><text x="180" y="97" font-size="10" fill="#6b655c">what is said and written</text>
+        <rect x="40" y="111" width="280" height="42" rx="6" fill="#fdf6e9" stroke="#b98a2f"/><text x="180" y="129" font-weight="bold" fill="#b98a2f">Underlying assumptions</text><text x="180" y="145" font-size="10" fill="#6b655c">what is believed without noticing</text>
+        <path d="M350 25 L350 140" stroke="#6b655c" stroke-width="1.5" marker-end="none"/><text x="352" y="30" font-size="14" fill="#6b655c">&#8595;</text>
+        <text x="380" y="80" font-size="10" fill="#6b655c" transform="rotate(90 380 80)">deeper = stronger pull</text>
+      </g></svg></div>
+      <p><strong>Reach for it</strong> when a change effort keeps bouncing off "how things are done here."<br>
+      <strong>Ask:</strong> "What does the organization actually do when no one is watching?"<br>
+      <strong>Limits.</strong> Assumptions are inferred, not observed; hold hypotheses lightly.</p>
+      <p class="golinks"><strong>Go deeper:</strong> <a href="https://en.wikipedia.org/wiki/Edgar_Schein">Edgar Schein's culture model (overview)</a></p>
+    </div></div>
+
+  <div class="card fw-card"><div class="fw-head"><h3>Basic assumptions in groups <span class="tag">Bion &middot; NEW</span></h3><span class="caret">&#9660;</span></div>
+    <p class="fw-oneline">Under pressure, groups slide from work mode into dependency, fight-flight, or pairing.</p>
+    <div class="fw-detail">
+      <p><strong>Definition.</strong> Wilfred Bion's Tavistock observation that a group is always doing two things: the task, and managing its own anxiety. When anxiety wins, the group unconsciously behaves as if its purpose were something else: waiting for a savior (dependency), finding an enemy (fight-flight), or hoping two members will produce the answer (pairing). Naming the mode releases the group back to work.</p>
+      <div class="fw-diagram"><svg viewBox="0 0 420 170" xmlns="http://www.w3.org/2000/svg"><g font-family="Segoe UI, sans-serif" font-size="12" fill="#2b2926" text-anchor="middle">
+        <rect x="130" y="12" width="160" height="42" rx="8" fill="#e3f0ef" stroke="#0e6f6a"/><text x="210" y="30" font-weight="bold" fill="#0a524e">Work group</text><text x="210" y="46" font-size="10" fill="#6b655c">on task, in reality</text>
+        <path d="M160 54 L80 100" stroke="#b98a2f" stroke-width="1.5"/><path d="M210 54 L210 100" stroke="#b98a2f" stroke-width="1.5"/><path d="M260 54 L340 100" stroke="#b98a2f" stroke-width="1.5"/>
+        <text x="210" y="80" font-size="10" fill="#b98a2f">anxiety pulls the group off task</text>
+        <rect x="15" y="102" width="130" height="48" rx="8" fill="#fdf6e9" stroke="#b98a2f"/><text x="80" y="122" font-weight="bold" fill="#b98a2f">Dependency</text><text x="80" y="138" font-size="10" fill="#6b655c">waiting for a savior</text>
+        <rect x="145" y="102" width="130" height="48" rx="8" fill="#fdf6e9" stroke="#b98a2f"/><text x="210" y="122" font-weight="bold" fill="#b98a2f">Fight-flight</text><text x="210" y="138" font-size="10" fill="#6b655c">an enemy to blame</text>
+        <rect x="275" y="102" width="130" height="48" rx="8" fill="#fdf6e9" stroke="#b98a2f"/><text x="340" y="122" font-weight="bold" fill="#b98a2f">Pairing</text><text x="340" y="138" font-size="10" fill="#6b655c">two will fix it</text>
+      </g></svg></div>
+      <p><strong>Reach for it</strong> when observing board simulations: name the mode, not the individuals.<br>
+      <strong>Ask yourself:</strong> "What is this group doing instead of the task?"<br>
+      <strong>Limits.</strong> Tavistock language can alienate; translate before using it with participants.</p>
+      <p class="golinks"><strong>Go deeper:</strong> <a href="https://en.wikipedia.org/wiki/Wilfred_Bion">Bion and group dynamics (overview)</a></p>
+    </div></div>
+  </div>
 </section>
 
 <section id="practice">
@@ -401,7 +619,7 @@
     });
   });
 
-  var chips = Array.prototype.slice.call(document.querySelectorAll('.chip'));
+  var chips = Array.prototype.slice.call(document.querySelectorAll('#chips .chip'));
   var blocks = Array.prototype.slice.call(document.querySelectorAll('.theme-block'));
   chips.forEach(function (chip) {
     chip.addEventListener('click', function () {
@@ -411,6 +629,26 @@
       blocks.forEach(function (b) {
         b.style.display = (theme === 'all' || b.getAttribute('data-theme') === theme) ? '' : 'none';
       });
+    });
+  });
+
+  var fwChips = Array.prototype.slice.call(document.querySelectorAll('#fw-chips .chip'));
+  var fwGroups = Array.prototype.slice.call(document.querySelectorAll('.fw-group'));
+  fwChips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      fwChips.forEach(function (c) { c.classList.remove('active'); });
+      chip.classList.add('active');
+      var g = chip.getAttribute('data-group');
+      fwGroups.forEach(function (b) {
+        b.style.display = (g === 'all' || b.getAttribute('data-group') === g) ? '' : 'none';
+      });
+    });
+  });
+
+  Array.prototype.slice.call(document.querySelectorAll('.fw-card')).forEach(function (card) {
+    card.addEventListener('click', function (e) {
+      if (e.target.closest('a')) return;
+      card.classList.toggle('open');
     });
   });
 
