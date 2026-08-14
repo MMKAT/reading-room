@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>The Reading Room</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#128218;</text></svg>">
+<style>
+  :root {
+    --ink: #2b2926; --soft: #6b655c; --cream: #faf7f2; --card: #ffffff;
+    --accent: #0e6f6a; --accent-dark: #0a524e; --accent-soft: #e3f0ef;
+    --line: #e8e2d8; --gold: #b98a2f;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+  body { background: var(--cream); color: var(--ink); font-family: Georgia, 'Times New Roman', serif; line-height: 1.6; }
+  .sans { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    background: rgba(250,247,242,0.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    max-width: 860px; margin: 0 auto; padding: 10px 16px;
+    display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+  }
+  .brand { font-weight: bold; font-size: 1.02rem; color: var(--accent-dark); text-decoration: none; }
+  nav a.link {
+    font-family: 'Segoe UI', system-ui, sans-serif; font-size: 0.86rem;
+    color: var(--soft); text-decoration: none; padding: 4px 2px;
+  }
+  nav a.link:hover { color: var(--accent); }
+  .progress-pill {
+    margin-left: auto; font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 0.78rem; color: var(--accent-dark); background: var(--accent-soft);
+    border-radius: 999px; padding: 4px 12px; white-space: nowrap;
+  }
+
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 16px 80px; }
+
+  header.hero { padding: 110px 0 30px; text-align: center; }
+  header.hero h1 { font-size: 2.4rem; font-weight: normal; letter-spacing: 0.02em; }
+  header.hero p.sub { color: var(--soft); font-style: italic; margin-top: 8px; font-size: 1.05rem; }
+  .updated {
+    display: inline-block; margin-top: 16px; font-size: 0.82rem;
+    background: var(--accent); color: #fff; padding: 5px 16px; border-radius: 999px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+  }
+
+  section { margin-top: 52px; }
+  h2 { font-size: 1.45rem; font-weight: normal; color: var(--accent-dark); margin-bottom: 4px; }
+  p.lead { color: var(--soft); font-size: 0.95rem; margin-bottom: 18px; }
+
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 20px 22px; margin-bottom: 14px; transition: box-shadow .2s ease;
+  }
+  .card:hover { box-shadow: 0 4px 18px rgba(43,41,38,0.07); }
+  .card h3 { font-size: 1.08rem; }
+  .card .meta { color: var(--soft); font-size: 0.87rem; margin: 2px 0 8px; }
+  .card p { font-size: 0.96rem; }
+  .note { font-size: 0.84rem; color: var(--gold); font-style: italic; margin-top: 6px; }
+  a { color: var(--accent); }
+
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0 22px; }
+  .chip {
+    font-family: 'Segoe UI', system-ui, sans-serif; font-size: 0.82rem;
+    border: 1px solid var(--line); background: var(--card); color: var(--soft);
+    border-radius: 999px; padding: 6px 14px; cursor: pointer; transition: all .15s ease;
+  }
+  .chip:hover { border-color: var(--accent); color: var(--accent); }
+  .chip.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  .theme-block { margin-bottom: 26px; }
+  .theme-block h3.theme {
+    font-size: 1.12rem; font-weight: normal; color: var(--accent-dark);
+    border-bottom: 1px solid var(--line); padding-bottom: 5px; margin-bottom: 12px;
+  }
+  .item {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 16px 18px; margin-bottom: 10px; transition: box-shadow .2s ease;
+  }
+  .item:hover { box-shadow: 0 4px 18px rgba(43,41,38,0.07); }
+  .item.read { opacity: 0.62; }
+  .item.read .t { text-decoration: line-through; text-decoration-thickness: 1px; }
+  .readbox {
+    flex-shrink: 0; width: 22px; height: 22px; margin-top: 3px;
+    border: 2px solid var(--line); border-radius: 6px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: #fff; background: var(--card); transition: all .15s ease;
+  }
+  .readbox:hover { border-color: var(--accent); }
+  .item.read .readbox { background: var(--accent); border-color: var(--accent); }
+  .item .t { font-weight: bold; font-size: 0.98rem; }
+  .item .m { color: var(--soft); font-size: 0.85rem; }
+  .item .w { font-size: 0.93rem; margin-top: 3px; }
+  .tag {
+    font-family: 'Segoe UI', system-ui, sans-serif; font-size: 0.68rem;
+    background: var(--accent); color: #fff; border-radius: 4px;
+    padding: 1px 7px; vertical-align: 2px; margin-left: 6px; white-space: nowrap;
+  }
+  .tag.book { background: var(--gold); }
+
+  .habit {
+    background: var(--accent-soft); border-radius: 12px; padding: 20px 22px; font-size: 0.98rem;
+    border: 1px solid #d3e6e4;
+  }
+  ol.steps { padding-left: 22px; font-size: 0.95rem; }
+  ol.steps li { margin-bottom: 8px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } .progress-pill { display: none; } }
+
+  footer { margin-top: 64px; text-align: center; color: var(--soft); font-size: 0.85rem; font-style: italic; border-top: 1px solid var(--line); padding-top: 24px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="brand" href="#top">&#128218; The Reading Room</a>
+    <a class="link" href="#month">This month</a>
+    <a class="link" href="#library">Library</a>
+    <a class="link" href="#practice">Practice</a>
+    <span class="progress-pill" id="progress">0 of 0 read</span>
+  </div>
+</nav>
+
+<div class="wrap" id="top">
+
+<header class="hero">
+  <h1>The Reading Room</h1>
+  <p class="sub">One place for what's worth reading, chosen for the coach you're becoming.</p>
+  <span class="updated">Updated 14 August 2026 &middot; new picks every month</span>
+</header>
+
+<section id="month">
+  <h2>Start here this month</h2>
+  <p class="lead">Three picks for August. Everything else can wait.</p>
+  <div class="card">
+    <h3>Coach the Person, Not the Problem <span class="tag book">THE BOOK</span></h3>
+    <p class="meta">Marcia Reynolds, 2020 &middot; book, read cover to cover</p>
+    <p>The definitive guide to reflective inquiry, written by a Master Certified Coach and past ICF global chair. This is the single closest book to where you want to take your coaching: fewer, better questions, and the coachee doing the thinking.</p>
+  </div>
+  <div class="card">
+    <h3>AI and the Future of Executive Coaching</h3>
+    <p class="meta">INSEAD Knowledge &middot; article, 15 minutes &middot; <a href="https://knowledge.insead.edu/career/ai-and-future-executive-coaching">read it here</a></p>
+    <p>Speaks directly to your question about what a senior leader needs from a human coach now. Its answer: AI becomes the sparring partner for practice and feedback; the human coach remains the "sensei" who provides emotional accountability and relational trust.</p>
+  </div>
+  <div class="card">
+    <h3>2025 ICF Global Coaching Study, Executive Summary</h3>
+    <p class="meta">International Coaching Federation &middot; report summary &middot; <a href="https://coachingfederation.org/resource/2025-icf-global-coaching-study-executive-summary/">read it here</a></p>
+    <p>The profession's own snapshot: who is coaching, where the market is going, what is changing. Useful ground truth before forming your own position on the future of the craft.</p>
+  </div>
+
+  <div class="habit" style="margin-top:22px">
+    <strong>The daily habit.</strong> One article a day, on the calendar, at the same time. The Economist or HBR counts; anything from this page counts double. The habit matters more than the choice: fifteen minutes, every day, and the reading takes care of itself.
+  </div>
+</section>
+
+<section id="library">
+  <h2>The library</h2>
+  <p class="lead">Every theme pairs one anchor (the work the field stands on) with current pieces worth your time. Tick what you've read; this page remembers.</p>
+
+  <div class="chips" id="chips">
+    <button class="chip active" data-theme="all">All</button>
+    <button class="chip" data-theme="craft">Craft</button>
+    <button class="chip" data-theme="ai">Age of AI</button>
+    <button class="chip" data-theme="self">Self-leadership</button>
+    <button class="chip" data-theme="conflict">Conflict &amp; feedback</button>
+    <button class="chip" data-theme="power">Power &amp; matrix</button>
+    <button class="chip" data-theme="change">Change</button>
+    <button class="chip" data-theme="teams">Teams</button>
+    <button class="chip" data-theme="boards">Boards</button>
+    <button class="chip" data-theme="resilience">Resilience</button>
+  </div>
+
+  <div class="theme-block" data-theme="craft">
+    <h3 class="theme">The craft of coaching</h3>
+    <div class="item" data-id="reynolds-coach-person"><div class="readbox">&#10003;</div><div><div class="t">Coach the Person, Not the Problem <span class="tag">ANCHOR</span></div><div class="m">Marcia Reynolds, 2020, book</div><div class="w">Reflective inquiry at master level. Start of everything.</div></div></div>
+    <div class="item" data-id="schein-humble"><div class="readbox">&#10003;</div><div><div class="t">Humble Inquiry</div><div class="m">Edgar Schein, 2013 (2nd ed. 2021), book</div><div class="w">The asking-versus-telling stance that minimal-intervention coaching rests on.</div></div></div>
+    <div class="item" data-id="icf-competencies"><div class="readbox">&#10003;</div><div><div class="t">ICF Core Competencies with MCC skill distinctions</div><div class="m">coachingfederation.org, reference document</div><div class="w">Not reading, calibration: the behavioral difference between good coaching and masterful coaching, spelled out.</div></div></div>
+    <div class="item" data-id="dehart-mcc"><div class="readbox">&#10003;</div><div><div class="t">Coaching at the MCC Level: The Invisible Architecture of Mastery</div><div class="m">Lyssa deHart, article &middot; <a href="https://lyssadehart.com/self-discovery-blog/professional-coaches/coaching-at-the-mcc-level-the-invisible-architecture-of-mastery/">link</a></div><div class="w">What actually distinguishes mastery: presence, non-attachment, comfort with silence, layered listening.</div></div></div>
+  </div>
+
+  <div class="theme-block" data-theme="ai">
+    <h3 class="theme">Coaching and leadership in the age of AI</h3>
+    <div class="item" data-id="icf-study-2025"><div class="readbox">&#10003;</div><div><div class="t">2025 ICF Global Coaching Study, Executive Summary <span class="tag">ANCHOR</span></div><div class="m">ICF &middot; <a href="https://coachingfederation.org/resource/2025-icf-global-coaching-study-executive-summary/">link</a></div><div class="w">The state of the profession; chase the linked future-scenarios work from this page.</div></div></div>
+    <div class="item" data-id="insead-ai-coaching"><div class="readbox">&#10003;</div><div><div class="t">AI and the Future of Executive Coaching</div><div class="m">INSEAD Knowledge &middot; <a href="https://knowledge.insead.edu/career/ai-and-future-executive-coaching">link</a></div><div class="w">The hybrid future: AI as sparring partner, coach as sensei.</div></div></div>
+    <div class="item" data-id="hbr-5-skills"><div class="readbox">&#10003;</div><div><div class="t">5 Critical Skills Leaders Need in the Age of AI</div><div class="m">Ibarra &amp; Jacobides, HBR, Oct 2025 &middot; <a href="https://hbr.org/2025/10/5-critical-skills-leaders-need-in-the-age-of-ai">link</a></div><div class="w">What your coachees are being told they need. Know it better than they do.</div><div class="note">Needs your HBR subscription.</div></div></div>
+    <div class="item" data-id="hbr-csuite-ai"><div class="readbox">&#10003;</div><div><div class="t">How C-Suite and Board Roles Are Being Reshaped Around AI</div><div class="m">Chamorro-Premuzic, HBR, Jun 2026 &middot; <a href="https://hbr.org/2026/06/how-c-suite-and-board-roles-are-being-reshaped-around-ai">link</a></div><div class="w">Bridges the AI question to your board work.</div><div class="note">Needs your HBR subscription.</div></div></div>
+  </div>
+
+  <div class="theme-block" data-theme="self">
+    <h3 class="theme">Self-leadership and awareness</h3>
+    <div class="item" data-id="goleman-leader"><div class="readbox">&#10003;</div><div><div class="t">What Makes a Leader? <span class="tag">ANCHOR</span></div><div class="m">Daniel Goleman, HBR, 1998</div><div class="w">The emotional-intelligence baseline behind every 360 debrief you run.</div></div></div>
+    <div class="item" data-id="kegan-immunity"><div class="readbox">&#10003;</div><div><div class="t">Immunity to Change</div><div class="m">Kegan &amp; Lahey, 2009, book</div><div class="w">Why leaders do not change despite wanting to. The deepest tool for a mid-program check-in call.</div></div></div>
+  </div>
+
+  <div class="theme-block" data-theme="conflict">
+    <h3 class="theme">Conflict, feedback, difficult conversations</h3>
+    <div class="item" data-id="stone-difficult"><div class="readbox">&#10003;</div><div><div class="t">Difficult Conversations <span class="tag">ANCHOR</span></div><div class="m">Stone, Patton &amp; Heen, 1999 (updated 2023), book</div><div class="w">You know it; refresh it. Still the base layer under this whole theme.</div></div></div>
+    <div class="item" data-id="buckingham-feedback"><div class="readbox">&#10003;</div><div><div class="t">The Feedback Fallacy</div><div class="m">Buckingham &amp; Goodall, HBR, 2019</div><div class="w">The strongest challenge to feedback orthodoxy. Sharpens every conversation you have about developmental feedback.</div></div></div>
+    <div class="item" data-id="gnepp-future-feedback"><div class="readbox">&#10003;</div><div><div class="t">The Future of Feedback (future-focused vs past-focused)</div><div class="m">Gnepp et al., open access &middot; <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7304587/">link</a></div><div class="w">Three studies with managers: future-focused feedback gets accepted and acted on more, even when negative. Directly usable in a coaching call.</div></div></div>
+  </div>
+
+  <div class="theme-block" data-theme="power">
+    <h3 class="theme">Power and the matrix</h3>
+    <div class="item" data-id="cohen-influence"><div class="readbox">&#10003;</div><div><div class="t">Influence Without Authority <span class="tag">ANCHOR</span></div><div class="m">Cohen &amp; Bradford, 3rd ed. 2017, book</div><div class="w">The exchange model underneath power-sharing in matrixed organizations.</div></div></div>
+    <div class="item" data-id="pfeffer-power"><div class="readbox">&#10003;</div><div><div class="t">Power: Why Some People Have It and Others Don't</div><div class="m">Jeffrey Pfeffer, 2010, book</div><div class="w">The unsentimental view of organizational politics your enterprise-leader coachees actually live in.</div></div></div>
+    <div class="item" data-id="hult-influence"><div class="readbox">&#10003;</div><div><div class="t">Influencing Without Authority to Drive Change</div><div class="m">Hult Ashridge, article &middot; <a href="https://www.hultashridge.com/en/insights/article/influence-without-authority/">link</a></div><div class="w">Short and practical: stakeholder dynamics, building advocates, trust.</div></div></div>
+  </div>
+
+  <div class="theme-block" data-theme="change">
+    <h3 class="theme">Leading change</h3>
+    <div class="item" data-id="kotter-change"><div class="readbox">&#10003;</div><div><div class="t">Leading Change: Why Transformation Efforts Fail <span class="tag">ANCHOR</span></div><div class="m">John Kotter, HBR, 1995</div><div class="w">The seminal base your change program content sits on.</div></div></div>
+    <div class="item" data-id="hbr-continuous-change"><div class="readbox">&#10003;</div><div><div class="t">Leading Through Continuous Change</div><div class="m">HBR, Jun 2025 &middot; <a href="https://hbr.org/2025/06/leading-through-continuous-change">link</a></div><div class="w">The current reframe: change as permanent condition, not episode. Your coachees will bring change fatigue; this names it.</div></div></div>
+    <div class="item" data-id="ccl-fatigue"><div class="readbox">&#10003;</div><div><div class="t">How to Overcome Change Fatigue</div><div class="m">Center for Creative Leadership, article &middot; <a href="https://www.ccl.org/articles/leading-effectively-articles/change-fatigue-continual-evolution/">link</a></div><div class="w">Five coachable strategies, including accounting for people's cumulative change history.</div></div></div>
+  </div>
+
+  <div class="theme-block" data-theme="teams">
+    <h3 class="theme">Teams and psychological safety</h3>
+    <div class="item" data-id="edmondson-fearless"><div class="readbox">&#10003;</div><div><div class="t">The Fearless Organization <span class="tag">ANCHOR</span></div><div class="m">Amy Edmondson, 2018, book</div><div class="w">The psychological-safety base for every team conversation.</div></div></div>
+    <div class="item" data-id="edmondson-wrong"><div class="readbox">&#10003;</div><div><div class="t">Right Kind of Wrong: The Science of Failing Well</div><div class="m">Amy Edmondson, 2023, book</div><div class="w">Her current thinking. Connects to growth mindset with far more substance than the pop version.</div></div></div>
+  </div>
+
+  <div class="theme-block" data-theme="boards">
+    <h3 class="theme">Board dynamics</h3>
+    <div class="item" data-id="cossin-boards"><div class="readbox">&#10003;</div><div><div class="t">High Performance Boards + The Four Pillars of Board Effectiveness <span class="tag">ANCHOR</span></div><div class="m">Didier Cossin, book (2nd ed. 2024) + IMD article &middot; <a href="https://www.imd.org/research-knowledge/articles/the-four-pillars-of-board-effectiveness/">article link</a></div><div class="w">The intellectual frame behind the board program. Worth knowing cold.</div></div></div>
+    <div class="item" data-id="eirola-dissent"><div class="readbox">&#10003;</div><div><div class="t">Boardroom Dissent: An Integrative Review</div><div class="m">Eirola et al., Corporate Governance: An International Review, 2025 &middot; <a href="https://onlinelibrary.wiley.com/doi/10.1111/corg.12607">link</a></div><div class="w">Academic state of the art on exactly what you observe in simulations: dissent, chair behavior, board climate.</div><div class="note">Paywalled; access being arranged.</div></div></div>
+    <div class="item" data-id="rr-power-boards"><div class="readbox">&#10003;</div><div><div class="t">Power Dynamics on Boards</div><div class="m">Russell Reynolds, article &middot; <a href="https://www.russellreynolds.com/en/insights/articles/power-dynamics-on-boards">link</a></div><div class="w">Five bases of power in the boardroom, dominant voices, silenced dissent. Maps one-to-one onto your simulation feedback vocabulary.</div></div></div>
+    <div class="item" data-id="harvard-chair"><div class="readbox">&#10003;</div><div><div class="t">Effective Board Leadership</div><div class="m">Harvard Law School Forum on Corporate Governance, Oct 2025 &middot; <a href="https://corpgov.law.harvard.edu/2025/10/08/effective-board-leadership-the-art-of-doing-it-well-and-the-risks-of-getting-it-wrong/">link</a></div><div class="w">Eight attributes of effective chairs, and the warning signs when board leadership drifts.</div></div></div>
+  </div>
+
+  <div class="theme-block" data-theme="resilience">
+    <h3 class="theme">Secure base and resilience</h3>
+    <div class="item" data-id="kohlrieser-dare"><div class="readbox">&#10003;</div><div><div class="t">Care to Dare <span class="tag">ANCHOR</span></div><div class="m">George Kohlrieser, 2012, book</div><div class="w">The secure-base model at the heart of the leadership program. Refresh, do not relearn.</div></div></div>
+    <div class="item" data-id="coutu-resilience"><div class="readbox">&#10003;</div><div><div class="t">How Resilience Works</div><div class="m">Diane Coutu, HBR, 2002</div><div class="w">The seminal resilience piece behind the resilience module.</div></div></div>
+  </div>
+</section>
+
+<section id="practice">
+  <h2>From reading to practice</h2>
+  <p class="lead">A reading only counts when it changes a conversation. Two small rituals keep that honest.</p>
+  <div class="two-col">
+    <div class="card">
+      <h3>After you read: the one-page note</h3>
+      <ol class="steps" style="margin-top:10px">
+        <li>The key argument, in two sentences.</li>
+        <li>What it changes in a coaching conversation.</li>
+        <li>One move or question you can use.</li>
+        <li>Its limits: when not to use it.</li>
+        <li>At most one quotable finding, with its source.</li>
+      </ol>
+      <p class="note">Over time these notes become your own ready reckoner: the thing you glance at before a session.</p>
+    </div>
+    <div class="card">
+      <h3>After a session: the ten-minute review</h3>
+      <ol class="steps" style="margin-top:10px">
+        <li>Quick estimates: coachee talk-time, questions vs statements, frameworks offered, silences held.</li>
+        <li>What did you hear that was not said, and did you use it?</li>
+        <li>Where did you step in when silence would have served better?</li>
+        <li>Which single question created the shift, and why did it work?</li>
+        <li>One behavior for next session. Exactly one.</li>
+      </ol>
+      <p class="note">No names, no identifying details, ever. Just the craft.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Made for Sheeja by Manjith, with Claude. New picks land here every month.
+</footer>
+
+</div>
+
+<script>
+(function () {
+  var KEY = 'reading-room-read';
+  var read = {};
+  try { read = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
+
+  var items = Array.prototype.slice.call(document.querySelectorAll('.item[data-id]'));
+
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(read)); } catch (e) {} }
+
+  function refresh() {
+    var done = 0;
+    items.forEach(function (it) {
+      var id = it.getAttribute('data-id');
+      var isRead = !!read[id];
+      it.classList.toggle('read', isRead);
+      if (isRead) done++;
+    });
+    var pill = document.getElementById('progress');
+    if (pill) pill.textContent = done + ' of ' + items.length + ' read';
+  }
+
+  items.forEach(function (it) {
+    var box = it.querySelector('.readbox');
+    if (!box) return;
+    box.addEventListener('click', function () {
+      var id = it.getAttribute('data-id');
+      if (read[id]) { delete read[id]; } else { read[id] = true; }
+      save();
+      refresh();
+    });
+  });
+
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.chip'));
+  var blocks = Array.prototype.slice.call(document.querySelectorAll('.theme-block'));
+  chips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      chips.forEach(function (c) { c.classList.remove('active'); });
+      chip.classList.add('active');
+      var theme = chip.getAttribute('data-theme');
+      blocks.forEach(function (b) {
+        b.style.display = (theme === 'all' || b.getAttribute('data-theme') === theme) ? '' : 'none';
+      });
+    });
+  });
+
+  refresh();
+})();
+</script>
+</body>
+</html>
